@@ -1,4 +1,4 @@
-puppet-htop
+puppet-motd
 ===========
 
 a puppet module to manage your motd
