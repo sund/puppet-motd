@@ -1,8 +1,11 @@
-name    ‘sund-motd'
-version ‘0’.1.0
+name    'sund-motd'
+version '0.1.0'
 source 'git@github.com:sund/puppet-motd.git'
-author ‘sound’
+author 'sund'
 license 'Apache License, Version 2.0'
-summary 'A simple module  managing /etc/motd as a template'
-description ‘modifies motd and some related files.
-project_page ‘—‘
+summary 'a puppet module for htop'
+description 'modifies motd and some related files.'
+project_page 'https://github.com/sund/puppet-motd'
+
+## Add dependencies, if any:
+# dependency 'username/name', '>= 1.2.0'
