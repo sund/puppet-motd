@@ -5,6 +5,8 @@ Processor:  <%= scope.lookupvar('::processorcount') %>x <%= scope.lookupvar('::p
 <% $end -%>
 Kernel:     <%= scope.lookupvar('::kernelrelease') %>
 Memory:     <%= scope.lookupvar('::memorysize') %>
-Free:       <%= scope.lookupvar('::memoryfree') %>
 
+Puppet Env: <%= scope.lookupvar('::environment') %>
+
+<% if is_virtual %> Virtualized with <%= virtual %>.<% end %>
 ---===---

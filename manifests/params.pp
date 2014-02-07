@@ -1,19 +1,19 @@
 class motd::params {
-  case $::lsbdistcodename {
-    'lenny': {
-      $file   = '/etc/init.d/bootmisc.sh'
-      $source = "puppet:///modules/motd/${::lsbdistcodename}/etc/init.d/bootmisc.sh"
-    }
-    'squeeze': {
-      $file   = '/etc/init.d/bootlogs'
-      $source = "puppet:///modules/motd/${::lsbdistcodename}/etc/init.d/bootlogs"
-    }
-    'maverick', 'natty': {
-      $file   = '/etc/update-motd.d'
-      $source = "puppet:///modules/motd/${::lsbdistcodename}/etc/update-motd.d"
+  case $::osfamily {
+    redhat, debian, suse, gentoo: {
+      $config_file = '/etc/motd'
+      $template = 'motd/motd.erb'
     }
     default: {
-      fail("Module ${module_name} does not support ${::lsbdistcodename}")
+      case $::operatingsystem {
+        gentoo: {
+          $config_file = '/etc/motd'
+          $template = 'motd/motd.erb'
+        }
+        default: {
+          fail("The ${module_name} module is not supported on ${::osfamily}/${::operatingsystem}.")
+        }
+      }
     }
   }
 }
