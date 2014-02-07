@@ -1,5 +1,5 @@
 name    'sund-motd'
-version '0.1.0'
+version '0.2.0'
 source 'git@github.com:sund/puppet-motd.git'
 author 'sund'
 license 'Apache License, Version 2.0'
