@@ -8,5 +8,5 @@ Memory:     <%= scope.lookupvar('::memorysize') %>
 
 Puppet Env: <%= scope.lookupvar('::environment') %>
 
-<% if is_virtual %> Virtualized with <%= virtual %>.<% end %>
+<% if is_virtual %>Virtualized with <%= virtual %>.<% end %>
 ---===---
