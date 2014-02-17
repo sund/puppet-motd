@@ -1,24 +1,35 @@
 # Class: motd
 #
 # This module manages 'Message Of The Day'
+# and the issue file
 #
 # Parameters:
 #   [*ensure*]
 #     Ensure if present or absent.
 #     Default: present
 #
-#   [*config_file*]
+#   [*motd_file*]
 #     'Message Of The Day' file.
 #     Only set this, if your platform is not supported or you know what you're doing.
 #     Default: auto-set, platform specific
 #
-#   [*template*]
+#   [*motd_template*]
+#     Template file to use.
+#     Only set this, if your platform is not supported or you know, what you're doing.
+#     Default: auto-set, platform specific
+#
+#   [*issue_file*]
+#     'Message Of The Day' file.
+#     Only set this, if your platform is not supported or you know what you're doing.
+#     Default: auto-set, platform specific
+#
+#   [*issue_template*]
 #     Template file to use.
 #     Only set this, if your platform is not supported or you know, what you're doing.
 #     Default: auto-set, platform specific
 #
 # Actions:
-#   Manages 'Message Of The Day' content.
+#   Manages 'Message Of The Day' & /etc/issue content.
 #
 # Requires:
 #   Nothing
@@ -30,8 +41,10 @@
 class motd(
   # set local vars from params
   $ensure = 'present',
-  $config_file = $motd::params::config_file,
-  $template = $motd::params::template
+  $motd_file = $motd::params::motd_file,
+  $motd_template = $motd::params::motd_template,
+  $issue_file = $motd::params::issue_file,
+  $issue_template = $motd::params::issue_template
   ) inherits motd::params {
   
   if $ensure == 'present' {
@@ -41,13 +54,23 @@ class motd(
   }
   
   if $kernel == "Linux" {
-    file { $config_file:
+    file { $motd_file:
       ensure  => $ensure_real,
-      backup  => false,
+      backup  => true,
       owner   => 'root',
       group   => 'root',
       mode    => '0644',
-      content => template("$template"),
+      content => template("$motd_template"),
+  }
+ }
+   if $kernel == "Linux" {
+    file { $issue_file:
+      ensure  => $ensure_real,
+      backup  => true,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => template("$issue_template"),
   }
  }
 }

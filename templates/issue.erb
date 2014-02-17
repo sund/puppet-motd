@@ -1,0 +1,13 @@
+<%= scope.lookupvar('::operatingsystem') %> <%= scope.lookupvar('::operatingsystemrelease') %> <%= scope.lookupvar('::architecture') %> <%= scope.lookupvar('::hardwareisa') %>
+
+FQDN:       <%= fqdn %>
+Processor:  <%= scope.lookupvar('::processorcount') %>x <%= scope.lookupvar('::processor0') %>
+<% $end -%>
+Kernel:     <%= scope.lookupvar('::kernelrelease') %>
+Memory:     <%= scope.lookupvar('::memorysize') %>
+tty:        \l 
+
+Puppet Env: <%= scope.lookupvar('::environment') %>
+
+<% if is_virtual %>Virtualized with <%= virtual %>.<% end %>
+---===---

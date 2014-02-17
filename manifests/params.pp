@@ -1,14 +1,18 @@
 class motd::params {
   case $::osfamily {
-    redhat, debian, suse, gentoo: {
-      $config_file = '/etc/motd'
-      $template = 'motd/motd.erb'
+    redhat, debian, suse, ubuntu: {
+      $motd_file = '/etc/motd'
+      $motd_template = 'motd/motd.erb'
+      $issue_file = '/etc/issue'
+      $issue_template = 'motd/issue.erb'
     }
     default: {
       case $::operatingsystem {
         gentoo: {
-          $config_file = '/etc/motd'
-          $template = 'motd/motd.erb'
+				$motd_file = '/etc/motd'
+				$motd_template = 'motd/motd.erb'
+				$issue_file = '/etc/issue'
+				$issue_template = 'motd/issue.erb'   
         }
         default: {
           fail("The ${module_name} module is not supported on ${::osfamily}/${::operatingsystem}.")
