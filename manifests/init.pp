@@ -73,4 +73,14 @@ class motd(
       content => template("$issue_template"),
   }
  }
+ 
+ # if ubuntu or Debian, make sure /etc/motd is 
+ # a symlink to /var/run/motd
+ # preferred symlink syntax
+ if $::osfamily == "Debian" {
+	file { '/etc/motd':
+	   ensure => 'link',
+	   target => '/var/run/motd',
+	}
+ }
 }

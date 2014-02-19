@@ -1,7 +1,13 @@
 class motd::params {
   case $::osfamily {
-    redhat, debian, suse, ubuntu: {
+    redhat, suse: {
       $motd_file = '/etc/motd'
+      $motd_template = 'motd/motd.erb'
+      $issue_file = '/etc/issue'
+      $issue_template = 'motd/issue.erb'
+    }
+    ubuntu, Debian: {
+      $motd_file = '/etc/motd.tail'
       $motd_template = 'motd/motd.erb'
       $issue_file = '/etc/issue'
       $issue_template = 'motd/issue.erb'
@@ -19,5 +25,5 @@ class motd::params {
         }
       }
     }
-  }
+  }  
 }
